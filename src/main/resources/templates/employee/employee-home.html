@@ -11,7 +11,9 @@
 		<div th:replace="navBar-layout :: employeeNavBar"></div>
 		
 		<div class="homeContent">
-			<h1 th:text="${'Welcome,' + ' ' + currentUser.name}"></h1>
+			<h1 th:text="${'Hello,' + ' ' + currentUser.name}"></h1>
+			<p>Welcome to the library</p>
+			<p>Your task is to manage the library and assist readers in borrowing and returning books</p>
 		</div>
 
 	</div>

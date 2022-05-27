@@ -1,5 +1,7 @@
 package com.psl.gems.model;
 
+import lombok.Data;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -8,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+@Data
 @Entity
 public class Book {
 	
@@ -15,6 +18,15 @@ public class Book {
 	private long ISBN;
 	private String title;
 	private String author;
+	private String language;
+
+	private String description;
+
+	private String NXB;
+
+//	private boolean available;
+
+	private Long amount;
 	
 	@OneToMany(mappedBy = "book", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
 	private Set<BookObj> bookObjs;
