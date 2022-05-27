@@ -57,17 +57,20 @@
                 <th>ISBN</th>
                 <th>Title</th>
                 <th>Author</th>
-                <!-- <th>Release Year</th>
-                      <th>Edition</th>
-                <th>Return Date</th>
-                <th>Reserved From</th>
-                <th>Reserved Until</th>-->
+                <th>Language</th>
+                <th>Description</th>
+                <th>Publisher</th>
+                <th>Amount</th>
                 <th>Action</th>
             </tr>
             <tr th:each="book : ${books}">
                 <td th:text="${book.ISBN}"></td>
                 <td th:text="${book.title}"></td>
                 <td th:text="${book.author}"></td>
+                <td th:text="${book.language}"></td>
+                <td th:text="${book.description}"></td>
+                <td th:text="${book.NXB}"></td>
+                <td th:number="${book.amount}"></td>
                 <td style="width: 240px">
                     <a th:href="@{/employee/books/{id}(id=${book.ISBN})}">
                         <button type="button" class="submit-button">Change info</button>

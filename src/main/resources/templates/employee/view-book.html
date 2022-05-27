@@ -54,6 +54,65 @@
             />
           </div>
         </div>
+        <div class="row">
+          <div class="col-50">
+            <label for="language">Language</label>
+          </div>
+          <div class="col-75">
+            <input
+                    type="text"
+                    id="language"
+                    name="language"
+                    th:field="${book.language}"
+                    required="required"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-50">
+            <label for="description">Description</label>
+          </div>
+          <div class="col-75">
+            <input
+                    type="text"
+                    id="description"
+                    name="description"
+                    th:field="${book.description}"
+                    required="required"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-50">
+            <label for="NXB">Publisher</label>
+          </div>
+          <div class="col-75">
+            <input
+                    type="text"
+                    id="NXB"
+                    name="NXB"
+                    th:field="${book.NXB}"
+                    required="required"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-50">
+            <label for="amount">Amount</label>
+          </div>
+          <div class="col-75">
+            <input
+                    type="number"
+                    id="amount"
+                    name="amount"
+                    th:field="${book.amount}"
+                    required="required"
+            />
+          </div>
+        </div>
 
         <div class="row">
           <div class="col-50"></div>
