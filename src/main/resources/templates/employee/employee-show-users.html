@@ -41,7 +41,7 @@
         </form>
 
         <div>
-            <a href="?" >
+            <a href="?">
                 <button type="button" class="submit-button">Show all users</button>
             </a>
         </div>
@@ -52,28 +52,30 @@
             </div>
         </form>
     </div>
-    <br/>
 
-    <table id="tablestyle">
-        <tr>
-            <th>User ID</th>
-            <th>Name</th>
-            <th style="width: 150px">Action</th>
-        </tr>
 
-        <tr th:each="user : ${users}">
+    <div class="style-scroll">
+        <table id="tablestyle">
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th style="width: 150px">Action</th>
+            </tr>
 
-            <td th:text="${user.user_id}"></td>
-            <td th:text="${user.name}"></td>
-            <td>
-                <form th:action="@{/employee/users/showuserinfo}" method="GET">
-                    <input class="table" type="submit" value="Show user info">
-                    <input type="hidden" th:value="${user.user_id}" name="user_id">
-                </form>
-            </td>
-        </tr>
+            <tr th:each="user : ${users}">
 
-    </table>
+                <td th:text="${user.user_id}"></td>
+                <td th:text="${user.name}"></td>
+                <td>
+                    <form th:action="@{/employee/users/showuserinfo}" method="GET">
+                        <input class="table" type="submit" value="Show user info">
+                        <input type="hidden" th:value="${user.user_id}" name="user_id">
+                    </form>
+                </td>
+            </tr>
+
+        </table>
+    </div>
 
 </div>
 </body>
