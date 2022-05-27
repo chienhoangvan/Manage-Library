@@ -70,7 +70,7 @@
                 <td th:text="${book.language}"></td>
                 <td th:text="${book.description}"></td>
                 <td th:text="${book.NXB}"></td>
-                <td th:number="${book.amount}"></td>
+                <td th:text="${book.amount}"></td>
                 <td style="width: 240px">
                     <a th:href="@{/employee/books/{id}(id=${book.ISBN})}">
                         <button type="button" class="submit-button">Change info</button>
