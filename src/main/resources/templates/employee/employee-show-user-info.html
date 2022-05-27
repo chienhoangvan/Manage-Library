@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>User Info</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/account-layout.css}">
+
+</head>
+
+<body>
+    <div th:replace="navBar-layout :: employeeNavBar"></div>
+    
+    <div class="container">
+        <h3>User info</h3>
+
+        <div class="row">
+            <div class="col-50">
+                Username:
+            </div>
+            <div class="col-75">
+                <text th:text="${user.username}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-50">
+                User ID:
+            </div>
+            <div class="col-75">
+                <text th:text="${user.user_id}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-50">
+                Name:
+            </div>
+            <div class="col-75">
+                <text th:text="${user.name}" />
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

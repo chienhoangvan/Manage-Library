@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+     <link rel="stylesheet" type="text/css" th:href="@{/CSS/account-layout.css}"> 
+   	 <!--<link rel="stylesheet" href="../../static/css/account-layout.css">-->
+    <title>Users</title>
+</head>
+
+<body>
+
+    <body>
+        <div th:replace="navBar-layout :: employeeNavBar"></div>
+        
+
+        <div class="container">
+
+
+            <h3>Users</h3>
+
+            <div class="row">
+
+                <form th:action="@{/employee/users/showusers}" method="GET">
+                    <div class="col-25">
+                        <label for="user_id">User ID</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="user_id" name="user_id">
+                    </div>
+
+                    <div class="col-25">
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="name" name="name">
+                    </div>
+                    <div>
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+                
+                <div>
+                    <a href="?" style="margin-left: 20px"><button type="button" class="submit-button">Show all users</button></a>
+                </div>
+            </div>
+            <br />
+            
+            <table id="tablestyle">
+                <tr>
+                	<th>User ID</th>
+                    <th>Name</th>
+                    <th style="width: 150px">Action</th>
+                </tr>
+				
+                <tr th:each="user : ${users}">
+                     
+                    <td th:text="${user.user_id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td>
+                        <form th:action="@{/employee/users/showuserinfo}" method="GET">
+                            <input class="table" type="submit" value="Show user info">
+                            <input type="hidden" th:value="${user.user_id}" name="user_id">
+                        </form>
+                    </td>
+                </tr>
+
+            </table> 
+
+        </div>
+    </body>
+
+</html>

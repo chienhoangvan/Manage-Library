@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/account-layout.css}">
+    <title>Change Book Info</title>
+  </head>
+
+  <body>
+    <div th:replace="navBar-layout :: employeeNavBar"></div>
+    
+
+    <div class="container">
+      <h3>Change book information</h3>
+
+      <form
+        action="/employee/books/savebookchange"
+        th:object="${book}"
+        th:method="PUT"
+      >
+        <div class="row">
+          <div class="col-50">
+            <!-- <label>BookID: </label> -->
+            <label>ISBN: </label>
+          </div>
+          <div class="col-75">
+            <label th:text="${book.ISBN}"></label>
+            <input
+              type="hidden"
+              th:value="${book.ISBN}"
+              th:field="${book.ISBN}"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-50">
+            <label>Title: </label>
+          </div>
+          <div class="col-75">
+            <input
+              type="text"
+              th:value="${book.title}"
+              th:field="${book.title}"
+              required="required"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-50">
+            <label>Author:</label>
+          </div>
+          <div class="col-75">
+            <input
+              type="text"
+              th:value="${book.author}"
+              th:field="${book.author}"
+              required="required"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-50"></div>
+          <div class="col-75">
+            <input type="submit" value="Submit" />
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+            <input type="hidden" name="_method" th:value="PUT" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

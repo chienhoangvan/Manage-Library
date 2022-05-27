@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1" />
+	<link rel="stylesheet" type="text/css" th:href="@{CSS/account-layout.css}"/>
+	<title>Employee-Home</title>
+</head>
+
+<body>
+	<div class="wrapper">
+		<div th:replace="navBar-layout :: employeeNavBar"></div>
+		
+		<div class="homeContent">
+			<h1 th:text="${'Welcome,' + ' ' + currentUser.name}"></h1>
+		</div>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/account-layout.css}">
+    <title>Issues</title>
+  </head>
+
+  <body>
+    <div th:replace="navBar-layout :: employeeNavBar"></div>
+    
+
+    <div class="container">
+      <h3>Issues</h3>
+      <div class="row">
+	      <form method="GET">
+	          <div class="col-25">
+		          <label for="status">Issue Id:</label>
+		      </div>
+		      <div class="col-75">
+		          <input type="number" name="issueId">
+		      </div>
+		      <div class="col-25">
+		          <label for="status">Status:</label>
+		      </div>
+		      <div class="col-75">
+			      <select name="status">
+			          <option value="">---------</option>
+			          <option th:each="status: ${T(com.psl.gems.model.IssueStatus).values()}" th:value="${status}" th:text="${status.displayValue}">
+			          </option>
+			      </select>
+		      </div>
+		      <div>
+		          <input type="submit" value="Search" />
+		      </div>
+	      </form>
+      </div>
+
+      <div th:if="${issues.size() == 0}">
+        <p>No issues.</p>
+      </div>
+
+      <div th:if="${issues.size() > 0}">
+        <table id="tablestyle">
+          <tr>
+            <th>Issue Id</th>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Reserved by</th>
+            <th>Reserved From</th>
+            <th>Reserved Until</th>
+            <th>Status</th>
+            <th style="width: 150px">View</th>
+          </tr>
+          <tr th:each="issue : ${issues}">
+            <td th:text="${issue.id}"></td>
+            <td th:text="${issue.bookObj.book.ISBN}"></td>
+            <td th:text="${issue.bookObj.book.title}"></td>
+            <td th:text="${issue.bookObj.book.author}"></td>
+            <td th:text="${issue.user.name}"></td>
+            <td th:text="${issue.issueDate}"></td>
+            <td th:text="${issue.returnDate}"></td>
+            <td th:text="${issue.status.displayValue}"></td>
+            <td>
+              <form th:action="@{/employee/issues/{id}(id=${issue.id})}" method="GET">
+              	<input type="submit" value="View Issue Info" class="table"
+							style="transform: scale(0.9);" />
+			  </form>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </body>
+</html>
