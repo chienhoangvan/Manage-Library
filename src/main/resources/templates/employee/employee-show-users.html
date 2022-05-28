@@ -59,6 +59,10 @@
             <tr>
                 <th>User ID</th>
                 <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>Number</th>
+                <th>Role</th>
                 <th style="width: 150px">Action</th>
             </tr>
 
@@ -66,6 +70,10 @@
 
                 <td th:text="${user.user_id}"></td>
                 <td th:text="${user.name}"></td>
+                <td th:text="${user.dateOfBirth}"></td>
+                <td th:text="${user.address}"></td>
+                <td th:text="${user.number}"></td>
+                <td th:text="${user.role}"></td>
                 <td>
                     <form th:action="@{/employee/users/showuserinfo}" method="GET">
                         <input class="table" type="submit" value="Show user info">

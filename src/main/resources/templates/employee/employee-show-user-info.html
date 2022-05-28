@@ -19,25 +19,48 @@
                 Username:
             </div>
             <div class="col-75">
-                <text th:text="${user.username}">
+                <text th:text="${user.username}"/>
             </div>
-        </div>
 
-        <div class="row">
             <div class="col-50">
                 User ID:
             </div>
             <div class="col-75">
-                <text th:text="${user.user_id}">
+                <text th:text="${user.user_id}"/>
             </div>
         </div>
 
         <div class="row">
+
             <div class="col-50">
                 Name:
             </div>
             <div class="col-75">
                 <text th:text="${user.name}" />
+            </div>
+
+            <div class="col-50">
+                Date of Birth:
+            </div>
+            <div class="col-75">
+                <text th:text="${user.dateOfBirth}" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-50">
+                Address:
+            </div>
+            <div class="col-75">
+                <text th:text="${user.address}" />
+            </div>
+
+            <div class="col-50">
+                Telephone Number:
+            </div>
+            <div class="col-75">
+                <text th:text="${user.number}" />
             </div>
         </div>
 
