@@ -26,7 +26,16 @@ public class Book {
 
     private Long amount;
 
-    //	private boolean available;
+    private String style;
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
+//	private boolean available;
 
     @OneToMany(mappedBy = "book", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<BookObj> bookObjs;

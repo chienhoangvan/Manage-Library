@@ -120,6 +120,12 @@ input[type="submit"], .submit-button {
     margin-top: 6px;
 }
 
+.col-250 {
+    float: left;
+    width: 850px;
+    margin-top: 6px;
+}
+
 .row:after {
     content: "";
     display: table;
