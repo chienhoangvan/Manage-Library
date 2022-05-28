@@ -55,6 +55,7 @@ public class EmployeeController {
         return "employee/employee-home.html";
     }
 
+    /*-----------------------Manage User--------------*/
     @GetMapping(value = "/users/showusers")
     public String showUsers(Model model,
                             @RequestParam(required = false) String name,
@@ -80,6 +81,7 @@ public class EmployeeController {
         return "employee/employee-show-user-info.html";
     }
 
+    /*-----------------------Manage Book -------------------*/
     @GetMapping(value = "/books")
     public String books() {
         return "redirect:/employee/books/showbooks";
