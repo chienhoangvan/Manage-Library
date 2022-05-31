@@ -76,7 +76,7 @@
                 <td th:text="${user.role}"></td>
                 <td>
                     <form th:action="@{/employee/users/showuserinfo}" method="GET">
-                        <input class="table" type="submit" value="Show user info">
+                        <input class="table" type="submit" value="Change users info">
                         <input type="hidden" th:value="${user.user_id}" name="user_id">
                     </form>
                 </td>
