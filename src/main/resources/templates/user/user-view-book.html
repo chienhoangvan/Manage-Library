@@ -16,9 +16,7 @@
             <div class="col-75">
                 <label th:text="${book.ISBN}"></label>
             </div>
-        </div>
 
-        <div class="row">
             <div class="col-50">
                 <label>Title:</label>
             </div>
@@ -27,6 +25,7 @@
             </div>
         </div>
 
+
         <div class="row">
             <div class="col-50">
                 <label>Author: </label>
@@ -34,9 +33,38 @@
             <div class="col-75">
                 <label th:text="${book.author}"></label>
             </div>
+
+            <div class="col-50">
+                <label>Language: </label>
+            </div>
+            <div class="col-75">
+                <label th:text="${book.language}"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-50">
+                <label>Publisher: </label>
+            </div>
+            <div class="col-75">
+                <label th:text="${book.NXB}"></label>
+            </div>
+
+            <div class="col-50">
+                <label>Description: </label>
+            </div>
+            <div class="col-75">
+                <label th:text="${book.description}"></label>
+            </div>
         </div>
         
         <div class="row">
+<!--            <div class="col-50">-->
+<!--                <label>Type: </label>-->
+<!--            </div>-->
+<!--            <div class="col-75">-->
+<!--                <label th:text="${book.type}"></label>-->
+<!--            </div>-->
             <div class="col-50">
                 <label>Availability: </label>
             </div>
