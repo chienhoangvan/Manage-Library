@@ -58,6 +58,11 @@
                 <input type="submit" value="Search"/>
             </div>
         </form>
+        <div>
+            <a href="?">
+                <button type="button" class="submit-button">Show all books</button>
+            </a>
+        </div>
     </div>
     <div class="style-scroll">
         <table th:if="${books.size() > 0 }" id="tablestyle">
@@ -81,7 +86,7 @@
                 <td th:text="${book.NXB}"></td>
                 <td th:text="${book.style}"></td>
                 <td th:text="${book.amount}"></td>
-                <td style="width: 240px">
+                <td style="width: 200px">
                     <a th:href="@{/employee/books/{id}(id=${book.ISBN})}">
                         <button type="button" class="submit-button">Add to issues</button>
                     </a>
