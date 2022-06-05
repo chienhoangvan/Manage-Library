@@ -15,7 +15,6 @@ import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 
 @Entity
-@Data
 public class BookObj {
 	
 	@Id

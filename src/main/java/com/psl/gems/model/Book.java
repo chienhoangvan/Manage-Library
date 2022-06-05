@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Data
 @Entity
 public class Book {
 

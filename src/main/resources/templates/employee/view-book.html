@@ -1,138 +1,139 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="ISO-8859-1" />
+<head>
+    <meta charset="ISO-8859-1"/>
     <!-- <link rel="stylesheet" href="../../static/css/account-layout.css" /> -->
-    
+
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/account-layout.css}">
     <title>View Book</title>
-  </head>
+</head>
 
-  <body>
-    <div th:replace="navBar-layout :: employeeNavBar"></div>
-    
+<body>
+<div th:replace="navBar-layout :: employeeNavBar"></div>
 
-    <div class="container">
-      <h3>Update Book information:</h3>
 
-      <form th:action="@{/employee/books/{id}(id=${book.ISBN})}" th:method="POST">
+<div class="container">
+    <h3>Update Book information:</h3>
+
+    <form th:action="@{/employee/books/{id}(id=${book.ISBN})}" th:method="POST">
         <div class="row">
-          <div class="col-50">
-            <label for="title">ISBN</label>
-          </div>
+            <div class="col-50">
+                <label for="title">ISBN</label>
+            </div>
 
-          <div class="col-75" th:text="${book.ISBN}"></div>
+            <div class="col-75" th:text="${book.ISBN}"></div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-50">
+                <label for="title">Title</label>
+            </div>
+            <div class="col-75">
+                <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        th:field="${book.title}"
+                        required="required"
+                />
+            </div>
+            <div class="col-50">
+                <label for="author">Author</label>
+            </div>
+            <div class="col-75">
+                <input
+                        type="text"
+                        id="author"
+                        name="author"
+                        th:field="${book.author}"
+                        required="required"
+                />
+            </div>
         </div>
 
         <div class="row">
-          <div class="col-50">
-            <label for="title">Title</label>
-          </div>
+            <div class="col-50">
+                <label for="language">Language</label>
+            </div>
+            <div class="col-75">
+                <input
+                        type="text"
+                        id="language"
+                        name="language"
+                        th:field="${book.language}"
+                        required="required"
+                />
+            </div>
 
-          <div class="col-75">
-            <input
-              type="text"
-              id="title"
-              name="title"
-              th:field="${book.title}"
-              required="required"
-            />
-          </div>
-        </div>
+            <div class="col-50">
+                <label for="description">Description</label>
+            </div>
+            <div class="col-75">
+                <input
+                        type="text"
+                        id="description"
+                        name="description"
+                        th:field="${book.description}"
+                        required="required"
+                />
+            </div>
 
-        <div class="row">
-          <div class="col-50">
-            <label for="author">Author</label>
-          </div>
-          <div class="col-75">
-            <input
-              type="text"
-              id="author"
-              name="author"
-              th:field="${book.author}"
-              required="required"
-            />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-50">
-            <label for="language">Language</label>
-          </div>
-          <div class="col-75">
-            <input
-                    type="text"
-                    id="language"
-                    name="language"
-                    th:field="${book.language}"
-                    required="required"
-            />
-          </div>
         </div>
 
         <div class="row">
-          <div class="col-50">
-            <label for="description">Description</label>
-          </div>
-          <div class="col-75">
-            <input
-                    type="text"
-                    id="description"
-                    name="description"
-                    th:field="${book.description}"
-                    required="required"
-            />
-          </div>
+            <div class="col-50">
+                <label for="NXB">Publisher</label>
+            </div>
+            <div class="col-75">
+                <input
+                        type="text"
+                        id="NXB"
+                        name="NXB"
+                        th:field="${book.NXB}"
+                        required="required"
+                />
+            </div>
+
+            <div class="col-50">
+                <label for="amount">Amount</label>
+            </div>
+            <div class="col-75">
+                <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        th:field="${book.amount}"
+                        required="required"
+                />
+            </div>
         </div>
 
         <div class="row">
-          <div class="col-50">
-            <label for="NXB">Publisher</label>
-          </div>
-          <div class="col-75">
-            <input
-                    type="text"
-                    id="NXB"
-                    name="NXB"
-                    th:field="${book.NXB}"
-                    required="required"
-            />
-          </div>
         </div>
 
         <div class="row">
-          <div class="col-50">
-            <label for="amount">Amount</label>
-          </div>
-          <div class="col-75">
-            <input
-                    type="number"
-                    id="amount"
-                    name="amount"
-                    th:field="${book.amount}"
-                    required="required"
-            />
-          </div>
+            <div class="col-50"></div>
+            <div class="col-50"></div>
+            <div class="col-75">
+                <input type="submit" value="Submit"/>
+            </div>
         </div>
+    </form>
 
-        <div class="row">
-          <div class="col-50"></div>
-          <div class="col-75">
-            <input type="submit" value="Submit" />
-          </div>
-        </div>
-      </form>
-      
-      <div>
-	      <p>
-	          Number of Copies: <span th:text="${book.bookObjs.size()}"></span>
-	      </p>
-	      <form th:action="@{/employee/books/{isbn}/add-copy(isbn=${book.ISBN})}" th:method="POST">
-	          <input type="submit" value="Add a new Copy" />
-	      </form>
-	      <br>
-	      <br>
-	      <br>
-      </div>
+    <div>
+        <p>
+            Number of Copies: <span th:text="${book.bookObjs.size()}"></span>
+        </p>
+        <form th:action="@{/employee/books/{isbn}/add-copy(isbn=${book.ISBN})}" th:method="POST">
+            <input type="submit" value="Add a new Copy"/>
+        </form>
+        <br>
+        <br>
+        <br>
     </div>
-  </body>
+</div>
+</body>
 </html>

@@ -178,6 +178,8 @@ public class EmployeeController {
         return "employee/employee-book-information-changed.html";
     }
 
+
+    /*-----------------Manage Issues-------------------*/
     @GetMapping(value = "/management/reservations")
     public String checkIssues(Model model, @RequestParam(defaultValue = "0") int issueId, @RequestParam(required = false) IssueStatus status) {
         List<Issue> issues;
@@ -205,7 +207,7 @@ public class EmployeeController {
         Issue issue = issueService.findById(issueId);
         issue.setStatus(status);
         issueService.save(issue);
-        return "redirect:/employee/reservations";
+        return "redirect:/employee/management/reservations";
     }
 
     @GetMapping(value = "/management/directloan")
