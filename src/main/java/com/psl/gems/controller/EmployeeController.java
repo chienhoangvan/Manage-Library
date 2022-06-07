@@ -1,10 +1,12 @@
 package com.psl.gems.controller;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -101,11 +103,58 @@ public class EmployeeController {
         return "employee/employee-show-books.html";
     }
 
-    @GetMapping(value = "/books/{isbn}")
-    public String viewBook(Model model, @PathVariable long isbn) {
+    @GetMapping(value = "/browsebooks")
+    public String browseBooks(Model model, @RequestParam(required = false) String title,
+                              @RequestParam(required = false) String author) {
+        List<Book> books;
+        if ((title == null || title.isEmpty()) && (author == null || author.isEmpty())) {
+            books = bookService.findAll();
+        } else {
+            books = bookService.searchBooks(title, author);
+        }
+        model.addAttribute("books", books);
+        return "employee/employee-directloan.html";
+    }
+
+    @GetMapping(value = "/books/view-direct-loan/{isbn}")
+    public String directLoanviewBook(Model model, @PathVariable long isbn) {
+        boolean available = bookService.checkAvailabilityById(isbn);
         Book book = bookService.findById(isbn);
         model.addAttribute("book", book);
-        return "employee/view-book.html";
+        model.addAttribute("isAvailable", available);
+        return "employee/employee-directloan-view-book.html";
+    }
+
+//    @GetMapping(value = "/books/view-direct-loan/{isbn}")
+//    public String directLoanViewBook(Model model, @PathVariable long isbn) {
+//        Book book = bookService.findById(isbn);
+//        model.addAttribute("book", book);
+//        return "employee/employee-directloan-view-book.html";
+//    }
+
+    @PostMapping(value="books/directloan/{bookId}")
+    public String reserveBook(@PathVariable Long bookId,
+                              @RequestParam Map<String, String> requestBody,
+                              @RequestParam int userId) {
+        Book book = bookService.findById(bookId);
+        BookObj bookObj = bookObjService.getAvailableCopyByBookId(book.getISBN());
+        if (bookObj == null) {
+            // TODO: Redirect and say that book is unavailable.
+            return "redirect:/employee/browsebooks";
+        }
+        User userLend = usService.findById(userId);
+        LocalDate issueDate = LocalDate.parse(requestBody.get("issueDate"));
+        LocalDate returnDate = LocalDate.parse(requestBody.get("returnDate"));
+        requestBody.get("returnDate");
+        Issue issue = new Issue();
+        issue.setBookObj(bookObj);
+        issue.setUser(userLend);
+        issue.setIssueDate(issueDate);
+        issue.setReturnDate(returnDate);
+        issue.setStatus(IssueStatus.ISSUED);
+        issueService.save(issue);
+        // TODO: Redirect and say reservation made successfully.
+        return "redirect:/employee/browsebooks";
     }
 
     @PostMapping(value = "/books/{isbn}")

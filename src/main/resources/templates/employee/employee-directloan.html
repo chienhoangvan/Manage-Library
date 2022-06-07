@@ -38,7 +38,6 @@
             <li><a href="/employee/management/directloan">Lending Book </a></li>
         </ul>
     </div>
-    <br/>
     <div class="row">
         <form th:action="@{/employee/manegement/directloan}" method="GET">
             <div class="col-25">
@@ -87,7 +86,7 @@
                 <td th:text="${book.style}"></td>
                 <td th:text="${book.amount}"></td>
                 <td style="width: 200px">
-                    <a th:href="@{/employee/books/{id}(id=${book.ISBN})}">
+                    <a th:href="@{/employee/books/view-direct-loan/{id}(id=${book.ISBN})}">
                         <button type="button" class="submit-button">Add to issues</button>
                     </a>
                 </td>
