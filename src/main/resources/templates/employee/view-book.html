@@ -15,7 +15,7 @@
 <div class="container">
     <h3>Update Book information:</h3>
 
-    <form th:action="@{/employee/books/{id}(id=${book.ISBN})}" th:method="POST">
+    <form th:action="@{/employee/books/update/{id}(id=${book.ISBN})}" th:method="POST">
         <div class="row">
             <div class="col-50">
                 <label for="title">ISBN</label>

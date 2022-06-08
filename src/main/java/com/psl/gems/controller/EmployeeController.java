@@ -1,6 +1,7 @@
 package com.psl.gems.controller;
 
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -11,13 +12,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.psl.gems.model.Book;
 import com.psl.gems.model.BookObj;
@@ -88,6 +83,12 @@ public class EmployeeController {
     public String books() {
         return "redirect:/employee/books/showbooks";
     }
+    @GetMapping(value = "/books/{isbn}")
+    public String viewBook(Model model, @PathVariable long isbn) {
+        Book book = bookService.findById(isbn);
+        model.addAttribute("book", book);
+        return "employee/view-book.html";
+    }
 
     @GetMapping(value = "/books/showbooks")
     public String showBooks(Model model,
@@ -125,12 +126,6 @@ public class EmployeeController {
         return "employee/employee-directloan-view-book.html";
     }
 
-//    @GetMapping(value = "/books/view-direct-loan/{isbn}")
-//    public String directLoanViewBook(Model model, @PathVariable long isbn) {
-//        Book book = bookService.findById(isbn);
-//        model.addAttribute("book", book);
-//        return "employee/employee-directloan-view-book.html";
-//    }
 
     @PostMapping(value="books/directloan/{bookId}")
     public String reserveBook(@PathVariable Long bookId,
@@ -157,11 +152,17 @@ public class EmployeeController {
         return "redirect:/employee/browsebooks";
     }
 
-    @PostMapping(value = "/books/{isbn}")
-    public String updateBook(@PathVariable long isbn, @RequestParam String title, @RequestParam String author) {
+    @PostMapping(value = "/books/update/{isbn}")
+    public String updateBook(@PathVariable long isbn, @RequestParam String title, @RequestParam String author,
+                             @RequestParam String language, @RequestParam String description,
+                             @RequestParam String NXB, @RequestParam Long amount) {
         Book book = bookService.findById(isbn);
         book.setTitle(title);
         book.setAuthor(author);
+        book.setLanguage(language);
+        book.setDescription(description);
+        book.setNXB(NXB);
+        book.setAmount(amount);
         bookService.save(book);
         return "redirect:/employee/books/" + isbn;
     }
@@ -227,6 +228,15 @@ public class EmployeeController {
         return "employee/employee-book-information-changed.html";
     }
 
+    @GetMapping(value = "/books/file-working")
+    public String fileWorkingBook() {
+        return "employee/employee-book-file-working";
+    }
+
+    @PostMapping(value = "/books/import")
+    public void mapReapExcelDatatoDB(/*@RequestParam("file") MultipartFile reapExcelDataFile*/) throws IOException {
+
+    }
 
     /*-----------------Manage Issues-------------------*/
     @GetMapping(value = "/management/reservations")

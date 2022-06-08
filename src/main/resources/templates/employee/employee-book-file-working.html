@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <title>File-Working</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/account-layout.css}">
+</head>
+<body>
+<div th:replace="navBar-layout :: employeeNavBar"></div>
+<div class="container">
+    <form th:action="@{/employee/books/import}" method="post" enctype="multipart/form-data">
+        <input type="file" th:name="file"/>
+        <input th:type="submit" value="Import"/>
+    </form>
+</div>
+
+</body>
+</html>
