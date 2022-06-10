@@ -82,7 +82,7 @@
                 <td th:text="${book.price}"></td>
                 <td style="width: 240px">
                     <a th:href="@{/employee/books/{id}(id=${book.ISBN})}">
-                        <button type="button" class="submit-button">Change info</button>
+                        <button type="button" class="submit-button" style="width: 110px">Change info</button>
                     </a>
                     <form
                             th:action="@{/employee/books/areyousuretodeletebook}"

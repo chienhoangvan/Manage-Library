@@ -9,62 +9,101 @@
 </head>
 
 <body>
-    <div th:replace="navBar-layout :: employeeNavBar"></div>
-    
-    <div class="container">
-        <h3>User info</h3>
+<div th:replace="navBar-layout :: employeeNavBar"></div>
+
+<div class="container">
+    <h3>User Information!!</h3>
+    <form th:action="@{/employee/users/update/{user_id}(user_id=${user.user_id})}" th:method="POST">
+        <div class="row">
+            <div class="col-50">
+                <label for="tittle">User-Id</label>
+            </div>
+            <div class="col-75" th:text="${user.user_id}"></div>
+
+            <div class="col-50">
+                <label for="username">Username</label>
+            </div>
+            <div class="col-75">
+                <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        th:field="${user.username}"
+                        required="required"
+                />
+            </div>
+
+        </div>
 
         <div class="row">
             <div class="col-50">
-                Username:
+                <label for="name">Fullname</label>
             </div>
             <div class="col-75">
-                <text th:text="${user.username}"/>
+                <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        th:field="${user.name}"
+                        required="required"
+                />
             </div>
 
             <div class="col-50">
-                User ID:
+                <label for="dateofbirth">Date Of Birth</label>
             </div>
             <div class="col-75">
-                <text th:text="${user.user_id}"/>
+                <input
+                        type="text"
+                        id="dateofbirth"
+                        name="dateofbirth"
+                        th:field="${user.dateOfBirth}"
+                        required="required"
+                />
             </div>
         </div>
 
         <div class="row">
 
             <div class="col-50">
-                Name:
+                <label for="address">Address</label>
             </div>
             <div class="col-75">
-                <text th:text="${user.name}" />
+                <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        th:field="${user.address}"
+                        required="required"
+                />
             </div>
 
+
             <div class="col-50">
-                Date of Birth:
+                <label for="number">Phone number</label>
             </div>
             <div class="col-75">
-                <text th:text="${user.dateOfBirth}" />
+                <input
+                        type="text"
+                        id="number"
+                        name="number"
+                        th:field="${user.number}"
+                        required="required"
+                />
             </div>
         </div>
 
         <div class="row">
-
-            <div class="col-50">
-                Address:
-            </div>
+            <div class="col-50"></div>
+            <div class="col-50"></div>
             <div class="col-75">
-                <text th:text="${user.address}" />
-            </div>
-
-            <div class="col-50">
-                Phone Number:
-            </div>
-            <div class="col-75">
-                <text th:text="${user.number}" />
+                <input type="submit" value="Submit"/>
             </div>
         </div>
+    </form>
 
-    </div>
+
+</div>
 </body>
 
 </html>

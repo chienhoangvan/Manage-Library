@@ -1,6 +1,7 @@
 package com.psl.gems.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.Set;
@@ -15,7 +16,6 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;

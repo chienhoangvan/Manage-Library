@@ -6,10 +6,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -70,12 +72,26 @@ public class EmployeeController {
         return "employee/employee-show-users.html";
     }
 
-    @GetMapping(value = "/users/showuserinfo")
-    public String showUserInfo(@RequestParam int user_id,
+    @GetMapping(value = "/users/showuserinfo/{user_id}")
+    public String showUserInfo(@PathVariable int user_id,
                                Model model) {
         User user = usService.findById(user_id);
         model.addAttribute("user", user);
         return "employee/employee-show-user-info.html";
+    }
+
+    @PostMapping(value = "/users/update/{user_id}")
+    public String updateUser(@PathVariable int user_id, @RequestParam String username,
+                             @RequestParam String name, @RequestParam(name = "dateOfBirth") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateOfBirth,
+                             @RequestParam String address, @RequestParam String number) {
+        User user = usService.findById(user_id);
+        user.setUsername(username);
+        user.setName(name);
+        user.setDateOfBirth(dateOfBirth);
+        user.setAddress(address);
+        user.setNumber(number);
+        usService.save(user);
+        return "employee/employee-user-infor-changed.html";
     }
 
     /*-----------------------Manage Book -------------------*/
