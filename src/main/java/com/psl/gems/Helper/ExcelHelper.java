@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    static String[] HEADERs = {"ISBN", "title", "author", "language", "description", "NXB", "amount", "style"};
+    static String[] HEADERs = {"ISBN", "title", "author", "language", "description", "NXB", "style",  "amount", "price"};
     static String SHEET = "Books";
 
     public static ByteArrayInputStream booksToExcelExport(List<Book> books) {
@@ -39,8 +39,9 @@ public class ExcelHelper {
                 row.createCell(3).setCellValue(book.getLanguage());
                 row.createCell(4).setCellValue(book.getDescription());
                 row.createCell(5).setCellValue(book.getNXB());
-                row.createCell(6).setCellValue(book.getAmount());
-                row.createCell(7).setCellValue(book.getStyle());
+                row.createCell(6).setCellValue(book.getStyle());
+                row.createCell(7).setCellValue(book.getAmount());
+                row.createCell(8).setCellValue(book.getPrice());
             }
             workbook.write(out);
             return new ByteArrayInputStream(out.toByteArray());
@@ -122,10 +123,13 @@ public class ExcelHelper {
                             book.setNXB(currentCell.getStringCellValue());
                             break;
                         case 6:
-                            book.setAmount((long) currentCell.getNumericCellValue());
+                            book.setStyle(currentCell.getStringCellValue());
                             break;
                         case 7:
-                            book.setStyle(currentCell.getStringCellValue());
+                            book.setAmount((long) currentCell.getNumericCellValue());
+                            break;
+                        case 8:
+                            book.setPrice((long) currentCell.getNumericCellValue());
                             break;
                         default:
                             break;
