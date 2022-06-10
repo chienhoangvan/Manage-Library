@@ -168,7 +168,7 @@ public class EmployeeController {
         book.setStyle(style);
         book.setPrice(price);
         bookService.save(book);
-        return "redirect:/employee/books/" + isbn;
+        return "employee/employee-book-information-changed.html";
     }
 
     @PostMapping(value = "/books/{isbn}/add-copy")
@@ -228,7 +228,6 @@ public class EmployeeController {
 
     @PutMapping(value = "/books/savebookchange")
     public String updatebookinfo(Book book) {
-        bookService.save(book);
         return "employee/employee-book-information-changed.html";
     }
 
