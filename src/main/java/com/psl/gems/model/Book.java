@@ -27,6 +27,12 @@ public class Book {
 
     private String style;
 
+	private Long price;
+
+    @OneToMany(mappedBy = "book", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<BookObj> bookObjs;
+
+
     public String getStyle() {
         return style;
     }
@@ -34,11 +40,6 @@ public class Book {
     public void setStyle(String style) {
         this.style = style;
     }
-//	private boolean available;
-
-    @OneToMany(mappedBy = "book", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
-    private Set<BookObj> bookObjs;
-
 
     public long getISBN() {
         return ISBN;
@@ -94,6 +95,14 @@ public class Book {
 
     public void setAmount(Long amount) {
         this.amount = amount;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
     }
 
     public Set<BookObj> getBookObjs() {

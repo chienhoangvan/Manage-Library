@@ -83,6 +83,7 @@ public class EmployeeController {
     public String books() {
         return "redirect:/employee/books/showbooks";
     }
+
     @GetMapping(value = "/books/{isbn}")
     public String viewBook(Model model, @PathVariable long isbn) {
         Book book = bookService.findById(isbn);
@@ -127,7 +128,7 @@ public class EmployeeController {
     }
 
 
-    @PostMapping(value="books/directloan/{bookId}")
+    @PostMapping(value = "books/directloan/{bookId}")
     public String reserveBook(@PathVariable Long bookId,
                               @RequestParam Map<String, String> requestBody,
                               @RequestParam int userId) {
@@ -155,7 +156,8 @@ public class EmployeeController {
     @PostMapping(value = "/books/update/{isbn}")
     public String updateBook(@PathVariable long isbn, @RequestParam String title, @RequestParam String author,
                              @RequestParam String language, @RequestParam String description,
-                             @RequestParam String NXB, @RequestParam Long amount) {
+                             @RequestParam String NXB, @RequestParam Long amount,
+                             @RequestParam String style, @RequestParam Long price) {
         Book book = bookService.findById(isbn);
         book.setTitle(title);
         book.setAuthor(author);
@@ -163,6 +165,8 @@ public class EmployeeController {
         book.setDescription(description);
         book.setNXB(NXB);
         book.setAmount(amount);
+        book.setStyle(style);
+        book.setPrice(price);
         bookService.save(book);
         return "redirect:/employee/books/" + isbn;
     }
@@ -228,15 +232,6 @@ public class EmployeeController {
         return "employee/employee-book-information-changed.html";
     }
 
-    @GetMapping(value = "/books/file-working")
-    public String fileWorkingBook() {
-        return "employee/employee-book-file-working";
-    }
-
-    @PostMapping(value = "/books/import")
-    public void mapReapExcelDatatoDB(/*@RequestParam("file") MultipartFile reapExcelDataFile*/) throws IOException {
-
-    }
 
     /*-----------------Manage Issues-------------------*/
     @GetMapping(value = "/management/reservations")

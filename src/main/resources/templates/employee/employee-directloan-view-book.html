@@ -60,11 +60,19 @@
 
     <div class="row">
         <div class="col-50">
-            <label>Type: </label>
+            <label>Style: </label>
         </div>
         <div class="col-75">
             <label th:text="${book.style}"></label>
         </div>
+        <div class="col-50">
+            <label>Price: </label>
+        </div>
+        <div class="col-75">
+            <label th:text="${book.price}"></label>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-50">
             <label>Availability: </label>
         </div>
@@ -77,37 +85,37 @@
     <div class="newBlock" th:if="${isAvailable}">
         <em>Reserve Book:</em>
         <div class="newForm">
-                <form th:method="POST" th:action="@{/employee/books/directloan/{id}(id=${book.ISBN})}">
+            <form th:method="POST" th:action="@{/employee/books/directloan/{id}(id=${book.ISBN})}">
 
+                <div class="col-25">
+                    <label style="padding-right: 8px;">User ID:</label>
+                </div>
+
+                <div class="col-75">
+                    <input type="text" name="userId">
+                </div>
+
+                <div class="row">
                     <div class="col-25">
-                        <label style="padding-right: 8px;">User ID:</label>
+                        <label style="padding-right: 8px;">Start Date:</label>
                     </div>
 
                     <div class="col-75">
-                        <input type="text" name="userId">
+                        <input type="date" name="issueDate">
                     </div>
 
-                    <div class="row">
-                        <div class="col-25">
-                            <label style="padding-right: 8px;">Start Date:</label>
-                        </div>
-
-                        <div class="col-75">
-                            <input type="date" name="issueDate">
-                        </div>
-
-                        <div class="col-25">
-                            <label style="padding-left: 20px; padding-right: 8px;">End Date:</label>
-                        </div>
-
-                        <div class="col-75">
-                            <input type="date" name="returnDate">
-                        </div>
-
-                        <input style="margin-left: 20px" type="submit" value="Reserve Book">
+                    <div class="col-25">
+                        <label style="padding-left: 20px; padding-right: 8px;">End Date:</label>
                     </div>
 
-                </form>
+                    <div class="col-75">
+                        <input type="date" name="returnDate">
+                    </div>
+
+                    <input style="margin-left: 20px" type="submit" value="Reserve Book">
+                </div>
+
+            </form>
         </div>
     </div>
 

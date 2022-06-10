@@ -68,7 +68,7 @@
                 <th>Description</th>
                 <th>Publisher</th>
                 <th>Style</th>
-                <th>Amount</th>
+                <th>Price</th>
                 <th>Action</th>
             </tr>
             <tr th:each="book : ${books}">
@@ -79,7 +79,7 @@
                 <td th:text="${book.description}"></td>
                 <td th:text="${book.NXB}"></td>
                 <td th:text="${book.style}"></td>
-                <td th:text="${book.amount}"></td>
+                <td th:text="${book.price}"></td>
                 <td style="width: 240px">
                     <a th:href="@{/employee/books/{id}(id=${book.ISBN})}">
                         <button type="button" class="submit-button">Change info</button>
