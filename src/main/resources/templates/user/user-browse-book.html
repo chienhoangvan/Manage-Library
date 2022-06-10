@@ -50,6 +50,7 @@
                 <th>Description</th>
                 <th>Publisher</th>
                 <th>Style</th>
+                <th>Price</th>
                 <th>Action</th>
             </tr>
             <tr th:each="book : ${books}">
@@ -60,6 +61,7 @@
                 <td th:text="${book.description}"></td>
                 <td th:text="${book.NXB}"></td>
                 <td th:text="${book.style}"></td>
+                <td th:text="${book.price}"></td>
                 <td style="width: 240px;">
                     <a th:href="@{/user/books/{id}(id=${book.ISBN})}">
                         <button style="width: 150px; margin-left: 3.5em" class="submit-button">Reservations</button>
