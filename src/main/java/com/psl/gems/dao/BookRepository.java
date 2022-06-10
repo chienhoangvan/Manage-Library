@@ -3,12 +3,13 @@ package com.psl.gems.dao;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.psl.gems.model.Book;
 
-public interface BookRepository extends CrudRepository<Book, Long> {
+public interface BookRepository extends JpaRepository<Book, Long> {
 	
 	List<Book> findByTitleContainingIgnoreCase(String title);
 	List<Book> findByAuthorContainingIgnoreCase(String author);
