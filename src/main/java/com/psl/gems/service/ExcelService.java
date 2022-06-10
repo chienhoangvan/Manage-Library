@@ -22,6 +22,12 @@ public class ExcelService {
         return in;
     }
 
+    public ByteArrayInputStream loadExport() {
+        List<Book> books = bookRepository.findAll();
+        ByteArrayInputStream in = ExcelHelper.booksToExcelExport(books);
+        return in;
+    }
+
     public void save(MultipartFile file) {
         try {
             List<Book> tutorials = ExcelHelper.excelToBooks(file.getInputStream());

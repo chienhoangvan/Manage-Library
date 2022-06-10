@@ -71,4 +71,19 @@ public class ExcelController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "/export")
+    public String ExportBooks() {
+        return "excel/export-file-excel-books";
+    }
+
+    @GetMapping(value = "/export-books")
+    public ResponseEntity<Resource> getFile2() {
+        String filename = "books.xlsx";
+        InputStreamResource file = new InputStreamResource(fileService.loadExport());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
+    }
 }

@@ -8,8 +8,8 @@
 <body>
 <div th:replace="navBar-layout :: employeeNavBar"></div>
 <div class="container">
-    <form th:action="@{/api/excel/download-template}" method="get" >
-        <input th:type="submit" value="Download Template"/>
+    <form th:action="@{/api/excel/export-books}" method="get" >
+        <input th:type="submit" value="Export file Excel Books"/>
     </form>
 </div>
 
