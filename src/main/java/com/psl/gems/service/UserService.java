@@ -45,6 +45,9 @@ public class UserService
 		User user= usRepo.findByUsername(username).get();
 		return user;
 	}
-	
+
+	public void deleteById(int userId) {
+		usRepo.deleteById(userId);
+	}
 
 }

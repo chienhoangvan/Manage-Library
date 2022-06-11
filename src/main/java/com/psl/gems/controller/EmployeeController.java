@@ -94,6 +94,19 @@ public class EmployeeController {
         return "employee/employee-user-infor-changed.html";
     }
 
+    @GetMapping(value = "/users/areyousuretodeleteuser")
+    public String areYouSureToDeleteUser(@RequestParam int deleteUserId, Model model) {
+        User user = usService.findById(deleteUserId);
+        model.addAttribute("deleteUser", user);
+        return "employee/employee-delete-user.html";
+    }
+
+    @PostMapping(value = "/users/deleteuser")
+    public String deleteUser(@RequestParam int deleteUserId) {
+        usService.deleteById(deleteUserId);
+        return "employee/employee-user-deleted.html";
+    }
+
     /*-----------------------Manage Book -------------------*/
     @GetMapping(value = "/books")
     public String books() {
@@ -224,7 +237,6 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/books/deletebook")
-
     public String deleteBook(@RequestParam Long deleteBookId) {
         bookService.deleteById(deleteBookId);
         return "redirect:/employee/books/bookdeleted";

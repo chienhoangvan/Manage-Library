@@ -78,30 +78,23 @@
                     <a th:href="@{/employee/users/showuserinfo/{user_id}(user_id=${user.user_id})}">
                         <button type="button" class="submit-button" style="width: 110px">Change info</button>
                     </a>
-<!--                    <form-->
-<!--                            th:action="@{/employee/books/areyousuretodeletebook}"-->
-<!--                            method="GET"-->
-<!--                    >-->
-<!--                        <input-->
-<!--                                type="submit"-->
-<!--                                value="Delete book"-->
-<!--                                class="table"-->
-<!--                                style="background-color: red; width: 110px"-->
-<!--                        />-->
-<!--                        <input-->
-<!--                                type="hidden"-->
-<!--                                name="deleteBookId"-->
-<!--                                th:value="${book.ISBN}"-->
-<!--                        />-->
-<!--                    </form>-->
+                    <form
+                            th:action="@{/employee/users/areyousuretodeleteuser}"
+                            method="GET"
+                    >
+                        <input
+                                type="submit"
+                                value="Delete user"
+                                class="table"
+                                style="background-color: red; width: 110px"
+                        />
+                        <input
+                                type="hidden"
+                                name="deleteUserId"
+                                th:value="${user.user_id}"
+                        />
+                    </form>
                 </td>
-
-<!--                <td>-->
-<!--                    <form th:action="@{/employee/users/showuserinfo}" method="GET">-->
-<!--                        <input class="table" type="submit" value="Change users info">-->
-<!--                        <input type="hidden" th:value="${user.user_id}" name="user_id">-->
-<!--                    </form>-->
-<!--                </td>-->
             </tr>
 
         </table>
