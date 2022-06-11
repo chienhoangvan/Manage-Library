@@ -30,7 +30,7 @@ public class ExcelController {
 
     @GetMapping(value = "/download-template")
     public ResponseEntity<Resource> getFile() {
-        String filename = "books.xlsx";
+        String filename = "books_template.xlsx";
         InputStreamResource file = new InputStreamResource(fileService.load());
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
@@ -78,9 +78,26 @@ public class ExcelController {
     }
 
     @GetMapping(value = "/export-books")
-    public ResponseEntity<Resource> getFile2() {
+    public ResponseEntity<Resource> getFileBook() {
         String filename = "books.xlsx";
         InputStreamResource file = new InputStreamResource(fileService.loadExport());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
+    }
+
+    /*-------------------Export file User--------------------*/
+
+    @GetMapping(value = "/exportusers")
+    public String ExportUsers() {
+        return "excel/export-file-excel-users";
+    }
+
+    @GetMapping(value = "/export-users")
+    public ResponseEntity<Resource> getFileUser() {
+        String filename = "users.xlsx";
+        InputStreamResource file = new InputStreamResource(fileService.loadUserExport());
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))

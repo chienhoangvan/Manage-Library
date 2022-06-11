@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import com.psl.gems.dao.UserRepository;
+import com.psl.gems.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.psl.gems.Helper.ExcelHelper;
@@ -16,6 +18,9 @@ public class ExcelService {
     @Autowired
     BookRepository bookRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     public ByteArrayInputStream load() {
         List<Book> books = bookRepository.findAll();
         ByteArrayInputStream in = ExcelHelper.booksToExcel(books);
@@ -25,6 +30,12 @@ public class ExcelService {
     public ByteArrayInputStream loadExport() {
         List<Book> books = bookRepository.findAll();
         ByteArrayInputStream in = ExcelHelper.booksToExcelExport(books);
+        return in;
+    }
+
+    public ByteArrayInputStream loadUserExport() {
+        List<User> users = userRepository.findAll();
+        ByteArrayInputStream in = ExcelHelper.usersToExcelExport(users);
         return in;
     }
 

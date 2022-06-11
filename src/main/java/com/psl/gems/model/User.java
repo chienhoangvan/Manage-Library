@@ -19,14 +19,19 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
+
     private String name;
 
     private Date dateOfBirth;
 
     private String number;
+
     private String role = "member";
+
     private String username;
+
     private String password;
+
     private boolean enabled = true;
 
     private String address;

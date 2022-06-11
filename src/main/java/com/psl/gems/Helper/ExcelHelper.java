@@ -7,19 +7,21 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Date;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import com.psl.gems.model.User;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.psl.gems.model.Book;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    static String[] HEADERs = {"ISBN", "title", "author", "language", "description", "NXB", "style",  "amount", "price"};
+    static String[] HEADERs = {"ISBN", "title", "author", "language", "description", "NXB", "style", "amount", "price"};
     static String SHEET = "Books";
+
+    static String[] HEADERs_2 = {"User_id", "FUll Name", "Date of Birth", "Phone Number", "Role", "Username", "password", "address"};
+    static String SHEET_2 = "Users";
 
     public static ByteArrayInputStream booksToExcelExport(List<Book> books) {
         try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
@@ -59,24 +61,42 @@ public class ExcelHelper {
                 Cell cell = headerRow.createCell(col);
                 cell.setCellValue(HEADERs[col]);
             }
-//            int rowIdx = 0;
-//            for (Book book : books) {
-//                Row row = sheet.createRow(rowIdx);
-//                row.createCell(0).setCellValue(book.getISBN());
-//                row.createCell(1).setCellValue(book.getTitle());
-//                row.createCell(2).setCellValue(book.getAuthor());
-//                row.createCell(3).setCellValue(book.getLanguage());
-//                row.createCell(4).setCellValue(book.getDescription());
-//                row.createCell(5).setCellValue(book.getNXB());
-//                row.createCell(6).setCellValue(book.getAmount());
-//                row.createCell(7).setCellValue(book.getStyle());
-//            }
             workbook.write(out);
             return new ByteArrayInputStream(out.toByteArray());
         } catch (IOException e) {
             throw new RuntimeException("fail to import data to Excel file: " + e.getMessage());
         }
     }
+
+    public static ByteArrayInputStream usersToExcelExport(List<User> users) {
+        try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
+            Sheet sheet = workbook.createSheet(SHEET_2);
+            // Header
+            Row headerRow = sheet.createRow(0);
+            for (int col = 0; col < HEADERs_2.length; col++) {
+                Cell cell = headerRow.createCell(col);
+                cell.setCellValue(HEADERs_2[col]);
+            }
+
+            int rowIdx = 1;
+            for (User user : users) {
+                Row row = sheet.createRow(rowIdx++);
+                row.createCell(0).setCellValue(user.getUser_id());
+                row.createCell(1).setCellValue(user.getName());
+                row.createCell(2).setCellValue(user.getDateOfBirth());
+                row.createCell(3).setCellValue(user.getNumber());
+                row.createCell(4).setCellValue(user.getRole());
+                row.createCell(5).setCellValue(user.getUsername());
+                row.createCell(6).setCellValue(user.getPassword());
+                row.createCell(7).setCellValue(user.getAddress());
+            }
+            workbook.write(out);
+            return new ByteArrayInputStream(out.toByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException("fail to import data to Excel file: " + e.getMessage());
+        }
+    }
+
     public static boolean hasExcelFormat(MultipartFile file) {
         if (!TYPE.equals(file.getContentType())) {
             return false;
