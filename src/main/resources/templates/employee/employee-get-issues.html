@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/account-layout.css}">
+    <title>Get Issues For User</title>
+</head>
+
+<body>
+<div th:replace="navBar-layout :: employeeNavBar"></div>
+
+
+<div class="container">
+    <div class="nav management-bar">
+        <ul>
+            <li><a href="/employee/management/reservations">Issues</a></li>
+            <li><a href="/employee/management/directloan">Lending Book </a></li>
+            <li><a href="/employee/management/getissues">Get Issues For User </a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <form method="GET">
+            <div class="col-25">
+                <label for="status">Issue Id:</label>
+            </div>
+            <div class="col-50">
+                <input type="number" style="width: 150px" name="issueId">
+            </div>
+            <div class="col-25">
+                <label for="userid">User ID:</label>
+            </div>
+            <div class="col-50">
+                <input type="number" style="width: 150px" name="userId">
+            </div>
+            <div class="col-25">
+                <label for="status">Status:</label>
+            </div>
+            <div class="col-50">
+                <select name="status" style="width: 170px">
+                    <option value="">---------</option>
+                    <option th:each="status: ${T(com.psl.gems.model.IssueStatus).values()}" th:value="${status}"
+                            th:text="${status.displayValue}">
+                    </option>
+                </select>
+            </div>
+            <div>
+                <input type="submit"
+                       style="width: 150px;
+                              margin-right: 15px;
+                              margin-left: 15px"
+                       value="Get"/>
+            </div>
+            <div>
+                <input onclick="printpage()"
+                       type="submit"
+                       style="width: 150px;
+                              margin-left: 15px;
+                              margin-right: 15px;
+                              font-weight: bold;"
+                       value="Print/Save"/>
+                <script>
+                    function printpage() {
+                        window.print();
+                    }
+                </script>
+            </div>
+        </form>
+    </div>
+
+    <!--    <div class="row">-->
+    <!--        <div class="col-50">-->
+    <!--            <label>User Reserved: </label>-->
+    <!--        </div>-->
+    <!--        <div class="col-75">-->
+    <!--            <label th:text="${issue.user.name}"></label>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+    <div th:if="${issues.size() == 0}">
+        <p>No issues.</p>
+    </div>
+
+    <div th:if="${issues.size() > 0}">
+
+        <table id="tablestyle">
+            <tr>
+                <th>Issue Id</th>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Reserved by</th>
+                <th>Reserved From</th>
+                <th>Reserved Until</th>
+            </tr>
+            <tr th:each="issue : ${issues}">
+                <td th:text="${issue.id}"></td>
+                <td th:text="${issue.bookObj.book.ISBN}"></td>
+                <td th:text="${issue.bookObj.book.title}"></td>
+                <td th:text="${issue.bookObj.book.author}"></td>
+                <td th:text="${issue.user.name}"></td>
+                <td th:text="${issue.issueDate}"></td>
+                <td th:text="${issue.returnDate}"></td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+</body>
+</html>

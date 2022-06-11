@@ -262,18 +262,45 @@ public class EmployeeController {
 
     /*-----------------Manage Issues-------------------*/
     @GetMapping(value = "/management/reservations")
-    public String checkIssues(Model model, @RequestParam(defaultValue = "0") int issueId, @RequestParam(required = false) IssueStatus status) {
+    public String checkIssues(Model model, @RequestParam(defaultValue = "0") int issueId,
+                              @RequestParam(defaultValue = "0") int userId,
+                              @RequestParam(required = false) IssueStatus status) {
         List<Issue> issues;
         if (issueId != 0) {
             issues = new ArrayList<Issue>();
             issues.add(issueService.findById(issueId));
         } else if (status != null) {
             issues = issueService.findByStatus(status);
+        } else if (userId != 0) {
+            issues = issueService.findByUser(usService.findById(userId));
         } else {
             issues = issueService.findAll();
         }
         model.addAttribute("issues", issues);
         return "employee/employee-reservations.html";
+    }
+
+    @GetMapping(value = "/management/getissues")
+    public String checkIssuesForUser(Model model, @RequestParam(defaultValue = "0") int issueId,
+                                     @RequestParam(defaultValue = "0") int userId,
+                                     @RequestParam(required = false) IssueStatus status) {
+        List<Issue> issues;
+        if (issueId != 0) {
+            issues = new ArrayList<Issue>();
+            issues.add(issueService.findById(issueId));
+        } else if (userId != 0) {
+            if(status == null) {
+                issues = issueService.findByUser(usService.findById(userId));
+            } else {
+                issues = issueService.findByUserAndStatus(usService.findById(userId), status);
+            }
+        } else if ( status != null) {
+            issues = issueService.findByStatus(status);
+        } else {
+            issues = issueService.findAll();
+        }
+        model.addAttribute("issues", issues);
+        return "employee/employee-get-issues.html";
     }
 
     @GetMapping(value = "issues/{issueId}")

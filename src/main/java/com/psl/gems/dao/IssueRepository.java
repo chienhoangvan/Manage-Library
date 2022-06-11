@@ -2,15 +2,18 @@ package com.psl.gems.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 import com.psl.gems.model.Issue;
 import com.psl.gems.model.IssueStatus;
 import com.psl.gems.model.User;
 
-public interface IssueRepository extends CrudRepository<Issue, Integer> {
+public interface IssueRepository extends JpaRepository<Issue, Integer> {
 	
 	List<Issue> findByStatus(IssueStatus status);
 	List<Issue> findByUser(User user);
+	
+	List<Issue> findByUserAndStatus(User user, IssueStatus status);
 
 }
