@@ -269,10 +269,14 @@ public class EmployeeController {
         if (issueId != 0) {
             issues = new ArrayList<Issue>();
             issues.add(issueService.findById(issueId));
-        } else if (status != null) {
-            issues = issueService.findByStatus(status);
         } else if (userId != 0) {
-            issues = issueService.findByUser(usService.findById(userId));
+            if(status == null) {
+                issues = issueService.findByUser(usService.findById(userId));
+            } else {
+                issues = issueService.findByUserAndStatus(usService.findById(userId), status);
+            }
+        } else if ( status != null) {
+            issues = issueService.findByStatus(status);
         } else {
             issues = issueService.findAll();
         }

@@ -7,10 +7,21 @@
 </head>
 <body>
 <div th:replace="navBar-layout :: employeeNavBar"></div>
-<div class="container">
-    <form th:action="@{/api/excel/export-books}" method="get" >
-        <input th:type="submit" value="Export file Excel Books"/>
-    </form>
+<div class="homeContent">
+    <h3>Export File Books</h3>
+    <div>
+        <form th:action="@{/api/excel/export-books}" method="get" >
+            <input th:type="submit" value="Export Excel"/>
+        </form>
+    </div>
+    <div>
+        <form th:action="@{/employee/books/showbooks}">
+            <div class="row">
+                <input class="registerButton" type="submit" value="Back">
+            </div>
+        </form>
+    </div>
+
 </div>
 
 </body>

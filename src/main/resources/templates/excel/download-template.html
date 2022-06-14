@@ -7,10 +7,21 @@
 </head>
 <body>
 <div th:replace="navBar-layout :: employeeNavBar"></div>
-<div class="container">
-    <form th:action="@{/api/excel/download-template}" method="get" >
-        <input th:type="submit" value="Download Template"/>
-    </form>
+<div class="homeContent">
+    <h3>Download Template</h3>
+    <div>
+        <form th:action="@{/api/excel/download-template}" method="get" >
+            <input th:type="submit" value="Download"/>
+        </form>
+    </div>
+    <div>
+        <form th:action="@{/employee/books/showbooks}">
+            <div class="row">
+                <input class="registerButton" type="submit" value="Back">
+            </div>
+        </form>
+    </div>
+
 </div>
 
 </body>
