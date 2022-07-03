@@ -45,6 +45,11 @@ public class IssueService {
 		return issueRepository.findByUserAndStatus(user, status);
 	}
 
+	public Long countByTitle(String title) {
+		return issueRepository.countByTitle(title);
+	}
+
+
 	public void issueBook(Book book, User user) {
 		BookObj bookObj = bookObjRepository.findFirstAvailableCopyByBookId(book.getISBN());
 		Issue issue = new Issue();

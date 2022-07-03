@@ -1,0 +1,142 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Statistical of Library</title>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{CSS/account-layout.css}"/>
+    <script type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        body {
+            background: url("../../Images/library-background.jpeg") repeat center fixed;
+            background-size: cover;
+            background-color: #bee4fa;
+            font-family: Helvetica, sans-serif;
+        }
+
+        .nav {
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .nav ul {
+            list-style-type: none;
+            margin: 4px;
+            padding: 0;
+            overflow: hidden;
+            background-color: #222;
+
+        }
+
+        .nav li {
+            float: left;
+        }
+
+        .nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav li a:hover {
+            background-color: rgba(100, 226, 148, 0.329);
+        }
+
+        .active {
+            background-color: #369c44;
+            color: white;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f1f2b3f2;
+            padding: 20px;
+            margin-top: 10px;
+            min-width: 10em;
+            height: 68em;
+            width: 1050px;
+            transform: scale(0.9);
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="nav">
+        <ul>
+            <li><a href="/employee">Home</a></li>
+            <li><a href="/employee/users/showusers">Users</a></li>
+            <li><a href="/employee/books/showbooks">Catalog</a></li>
+            <li><a href="/employee/management/reservations">Process Management</a></li>
+            <li><a href="/statistical/chart">Statistical</a></li>
+            <li style="float: right"><a class="active" href="/logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div style="width: 1000px;align-content: center">
+            <h2>Statistical of Library</h2>
+            <br/>
+            <div id="chart_div"></div>
+            <br/>
+            <br/>
+            <br/>
+            <div id="piechart" style="width: 950px; height: 500px;"></div>
+        </div>
+        <script th:inline="javascript">
+            var real_data = /*[[${chartData}]]*/'noValue';
+            $(document).ready(function () {
+                google.charts.load('current', {
+                    packages: ['corechart', 'bar']
+                });
+                google.charts.setOnLoadCallback(drawColumnChart);
+                google.charts.setOnLoadCallback(drawPieChart);
+            });
+
+            function drawColumnChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Book Tittle');
+                data.addColumn('number', 'Number of Issue');
+                Object.keys(real_data).forEach(function (key) {
+                    data.addRow([key, real_data[key]]);
+                });
+                var options = {
+                    title: 'Blog stats',
+                    hAxis: {
+                        title: 'Book Tittle',
+                    },
+                    vAxis: {
+                        title: 'View Count'
+                    }
+                };
+                var chart = new google.visualization.ColumnChart(document
+                    .getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+
+            function drawPieChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Book Tittle');
+                data.addColumn('number', 'Number of Issue');
+                Object.keys(real_data).forEach(function (key) {
+                    data.addRow([key, real_data[key]]);
+                });
+                var options = {
+                    title: 'Blog stats'
+                };
+                var chart = new google.visualization.PieChart(document
+                    .getElementById('piechart'));
+                chart.draw(data, options);
+            }
+        </script>
+    </div>
+</div>
+</body>
+</html>
