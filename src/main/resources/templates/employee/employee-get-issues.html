@@ -19,7 +19,7 @@
         </ul>
     </div>
     <div class="row">
-        <form method="GET">
+        <form th:action="@{/pdf/getIssuesPdf}" method="POST">
             <div class="col-25">
                 <label for="status">Issue Id:</label>
             </div>
@@ -48,25 +48,15 @@
                        style="width: 150px;
                               margin-right: 15px;
                               margin-left: 15px"
-                       value="Get"/>
-            </div>
-            <div>
-                <input onclick="printpage()"
-                       type="submit"
-                       style="width: 150px;
-                              margin-left: 15px;
-                              margin-right: 15px;
-                              font-weight: bold;"
-                       value="Print/Save"/>
-                <script>
-                    function printpage() {
-                        window.print();
-                    }
-                </script>
+                       value="Print Issues"/>
             </div>
         </form>
     </div>
 
+<!--    <form th:action="@{/pdf/get-issues-pdf}" method="POST">-->
+<!--        <input type="submit" value="Print Issues" class="table"-->
+<!--               style="transform: scale(0.9);"/>-->
+<!--    </form>-->
 
     <div th:if="${issues.size() == 0}">
         <p>No issues.</p>

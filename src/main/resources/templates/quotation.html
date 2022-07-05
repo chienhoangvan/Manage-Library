@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        h1 {
+            color: brown;
+        }
+
+        .quotation {
+            width: 100%;
+        }
+
+        .quotation, .quotation th, .quotation td {
+            border: 1px solid brown;
+            border-collapse: collapse;
+        }
+
+        .quotation th {
+            background-color: brown;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Quotation</h1>
+<table>
+    <tr>
+        <th>Customer</th>
+    </tr>
+    <tr>
+        <td th:text="'Full Name: ' + ${customer.name}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Date Of Birth: ' + ${customer.dateOfBirth}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Address: ' + ${customer.address}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Phone: ' + ${customer.number}"></td>
+    </tr>
+</table>
+<br/>
+<table class="quotation">
+    <tr>
+        <th>Item #</th>
+        <th>Issue Id</th>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Reserved From</th>
+        <th>Reserved Until</th>
+    </tr>
+    <tr th:each="issue, issueStat: ${issues}">
+        <td th:text="${issueStat.index + 1}"></td>
+        <td th:text="${issue.id}"></td>
+        <td th:text="${issue.bookObj.book.ISBN}"></td>
+        <td th:text="${issue.bookObj.book.title}"></td>
+        <td th:text="${issue.bookObj.book.author}"></td>
+        <td th:text="${issue.issueDate}"></td>
+        <td th:text="${issue.returnDate}"></td>
+    </tr>
+</table>
+</body>
+</html>
