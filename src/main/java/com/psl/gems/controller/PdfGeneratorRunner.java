@@ -78,7 +78,7 @@ public class PdfGeneratorRunner {
         model.addAttribute("issues", issues);
         data.put("issues", issues);
 
-        pdfGenerateService.generatePdfFile("quotation", data, "quotation.pdf");
+        pdfGenerateService.generatePdfFile("quotation", data, "ticketOfIssues.pdf");
 
         return "employee/employee-get-issues.html";
     }
