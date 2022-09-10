@@ -51,16 +51,6 @@ public class LibraryManagementSystemApplication {
 				user.setRole("librarian");
 				userRepository.save(user);
 			}
-			
-//			Book book = new Book();
-//			book.setISBN(1);
-//			BookObj bookObj = new BookObj();
-//			Set<BookObj> bookObjSet = new HashSet<BookObj>();
-//			book.setBookObjs(bookObjSet);
-//			book = bookRepository.save(book);
-////			bookRepository.delete(book);
-//			
-//			System.out.println(bookObjRepository.findFirstAvailableCopyByBookId(book.getISBN()));
 		};
 	}
 

@@ -17,14 +17,6 @@ public class CurrentUserFinder {
 	public int getCurrentUserId() {
 		UserDetails details = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username=details.getUsername();
-//		int userId=-1;
-//		for(User user: usService.findAll()) {
-//			if(user.getUsername().equals(username)) {
-//				userId=user.getUser_id();
-//				break;
-//			}
-//		}
-//		return userId;
 		
 		User user= usService.getByUsername(username);
 		return user.getUser_id();
